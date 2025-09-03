@@ -1,0 +1,23 @@
+<!-- Dowload json page-->
+{% extends "base.html" %}
+
+    
+    {% block side_buttons %}
+    <div class="back-button">
+      <div class="container ms-4 mt-3 mr" style="float:right">
+        <button type="button" class="btn btn-outline-primary me-3 sticky-top" style="float:right" onclick="location.href = '/filter/'">Create new filtration setup</button>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+      <div class="container ms-4 mt-5">
+        <h3>Download your filtration setup file here:</h3>
+        <div class="container ms-5 mt-5 ml-5">
+          <a href="{% url 'download' %}?download=1">
+            <button type="button" class="btn btn-primary me-3 btn-lg">Download</button>
+          </a>
+        </div>
+
+      </div>
+    {% endblock %}

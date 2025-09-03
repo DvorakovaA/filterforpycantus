@@ -1,0 +1,323 @@
+<!-- Home page-->
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <!-- Basic intro/instructions -->
+    <div class="container ms-4 mt-4 mr-1">
+
+    </div>
+
+    <!-- Request form window -->
+    <div class="input-form mb-5">
+        <div class="container ms-4 mt-4 mr-1 border border-secondary rounded">
+            <form method="post">
+                {% csrf_token %}
+              <div class="row align-items-start">
+                <div class="row justify-content-around">
+                  <div class="col md-4 t-1">
+                    <h2>Filtration form</h2> <br>
+                  </div>
+                  <div class="col offset-md-4">
+                    <br>
+                        <p class="text-end" style="float: right;">
+                            <i>The values in the menu are based on the CantusCorpus v1.0 dataset. 
+                            The option <b>Other</b> is always available for entering your own value(s).
+                            </i>
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-around">
+                    <div class="col md-4 mb-3">
+                        <b><label for="{{ form.name.id_for_label }}" class="form-label">Name of filtration setting:</label></b>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                            <div class="text-danger">{{ form.name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <h3>Values to be included</h3>
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.genre_incl.id_for_label }}" class="form-label">Genre</label></b>
+                      <a href="/filter/help/#genre" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                      </a>
+                    {{ form.genre_incl }}
+                    {% if form.genre_incl.errors %}
+                        <div class="text-danger">{{ form.genre_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.title_incl.id_for_label }}" class="form-label">Title</label></b>
+                    <a href="/filter/help/#title" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.title_incl }}
+                    {% if form.title_incl.errors%}
+                        <div class="text-danger">{{ form.title_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.office_incl.id_for_label }}" class="form-label">Office</label></b>
+                    <a href="/filter/help/#office" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.office_incl }}
+                    {% if form.office_incl.errors %}
+                        <div class="text-danger">{{ form.office_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.siglum_incl.id_for_label }}" class="form-label">Siglum</label></b>
+                    <a href="/filter/help/#siglum" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.siglum_incl }}
+                    {% if form.siglum_incl.errors %}
+                        <div class="text-danger">{{ form.siglum_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.feast_incl.id_for_label }}" class="form-label">Feast</label></b>
+                    <a href="/filter/help/#feast" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.feast_incl }}
+                    {% if form.feast_incl.errors %}
+                        <div class="text-danger">{{ form.feast_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.century_incl.id_for_label}}" class="form-label">Century</label></b>
+                    <a href="/filter/help/#century" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.century_incl }}
+                    {% if form.century_incl.errors %}
+                        <div class="text-danger">{{ form.century_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                </div>
+
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.db_incl.id_for_label}}" class="form-label">Source Database</label></b>
+                    <a href="/filter/help/#db" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.db_incl }}
+                    {% if form.db_incl.errors %}
+                        <div class="text-danger">{{ form.db_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.num_century_incl.id_for_label}}" class="form-label">Numerical Century</label></b>
+                    <a href="/filter/help/#num_century" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.num_century_incl }}
+                    {% if form.num_century_incl.errors %}
+                        <div class="text-danger">{{ form.num_century_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                <div class="row justify-content-around">
+                  <div class="col md-4 mt-2">
+                  </div>
+
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.provenance_incl.id_for_label}}" class="form-label">Provenance</label></b>
+                    <a href="/filter/help/#provenance" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.provenance_incl }}
+                    {% if form.provenance_incl.errors %}
+                        <div class="text-danger">{{ form.provenance_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>  
+                <div class="row justify-content-around">
+                  <div class="col md-4 mt-2">
+                  </div>
+
+                  <div class="col offset-md-1 mt-2 mb-4">
+                    <b><label for="{{ form.cursus_incl.id_for_label}}" class="form-label">Cursus</label></b>
+                    <a href="/filter/help/#cursus" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.cursus_incl }}
+                    {% if form.cursus_incl.errors %}
+                        <div class="text-danger">{{ form.cursus_incl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+            
+                <h3>Values to be exluded</h3>
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.genre_excl.id_for_label }}" class="form-label">Genre</label></b>
+                    <a href="/filter/help/#genre" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.genre_excl }}
+                    {% if form.genre_excl.errors %}
+                        <div class="text-danger">{{ form.genre_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.title_excl.id_for_label }}" class="form-label">Title</label></b>
+                    <a href="/filter/help/#title" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.title_excl }}
+                    {% if form.title_excl.errors%}
+                        <div class="text-danger">{{ form.title_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.office_excl.id_for_label }}" class="form-label">Office</label></b>
+                    <a href="/filter/help/#office" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.office_excl }}
+                    {% if form.office_excl.errors %}
+                        <div class="text-danger">{{ form.office_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.siglum_excl.id_for_label }}" class="form-label">Siglum</label></b>
+                    <a href="/filter/help/#siglum" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.siglum_excl }}
+                    {% if form.siglum_excl.errors %}
+                        <div class="text-danger">{{ form.siglum_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.feast_excl.id_for_label }}" class="form-label">Feast</label></b>
+                    <a href="/filter/help/#feast" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.feast_excl }}
+                    {% if form.feast_excl.errors %}
+                        <div class="text-danger">{{ form.feast_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.century_excl.id_for_label}}" class="form-label">Century</label></b>
+                    <a href="/filter/help/#century" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.century_excl }}
+                    {% if form.century_excl.errors %}
+                        <div class="text-danger">{{ form.century_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                </div>
+
+                <div class="row justify-content-around">
+                  <div class="col md-3 mt-2">
+                    <b><label for="{{ form.db_excl.id_for_label}}" class="form-label">Source Database</label></b>
+                    <a href="/filter/help/#db" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.db_excl }}
+                    {% if form.db_excl.errors %}
+                        <div class="text-danger">{{ form.db_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.num_century_excl.id_for_label}}" class="form-label">Numerical Century</label></b>
+                    <a href="/filter/help/#num_century" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.num_century_excl }}
+                    {% if form.num_century_excl.errors %}
+                        <div class="text-danger">{{ form.num_century_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                <div class="row justify-content-around">
+                  <div class="col md-4 mt-2">
+                  </div>
+
+                  <div class="col offset-md-1 mt-2">
+                    <b><label for="{{ form.provenance_excl.id_for_label}}" class="form-label">Provenance</label></b>
+                    <a href="/filter/help/#provenance" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.provenance_excl }}
+                    {% if form.provenance_excl.errors %}
+                        <div class="text-danger">{{ form.provenance_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>  
+                <div class="row justify-content-around">
+                  <div class="col md-4 mt-2">
+                  </div>
+
+                  <div class="col offset-md-1 mt-2 mb-4">
+                    <b><label for="{{ form.cursus_excl.id_for_label}}" class="form-label">Cursus</label></b>
+                    <a href="/filter/help/#cursus" target="_blank" class="ms-1 text-decoration-none">
+                          <i class="bi bi-question-circle"></i>
+                    </a>
+                    {{ form.cursus_excl }}
+                    {% if form.cursus_excl.errors %}
+                        <div class="text-danger">{{ form.cursus_excl.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            
+
+            <div class="d-flex justify-content-end mt-3 mb-2">
+              <button type="submit" class="btn btn-outline-primary">
+                Submit setting to generate filtration file
+              </button>
+            </div>
+            </form>
+            
+        </div>
+    </div>
+  <br>
+  <script>
+  // Autocomplete in feasts selection
+    $(document).ready(function() {
+        $('.feasts_select').select2({
+            placeholder: "Select feast(s)", 
+            allowClear: true
+        });
+    });
+  </script>
+
+  <!-- Custom CSS for vertical stacking of options in feast_select -->
+  <style>
+    .select2-results__option {
+        display: block;      /* Force each option to be displayed on a separate line */
+    }
+  </style>
+{% endblock %}

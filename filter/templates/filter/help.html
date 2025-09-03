@@ -1,0 +1,430 @@
+<!-- Help page-->
+{% extends "base.html" %}
+
+    
+    {% block side_buttons %}
+    <div class="back-button">
+      <div class="container ms-4 mt-3 mr" style="float:right">
+        <button type="button" class="btn btn-outline-primary me-3 sticky-top" style="float:right" onclick="window.history.back()">Back</button>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+      <div class="container ms-4 mt-3">
+        <h2>Help</h2>
+        <div class="container mb-4 mt-3">
+          Filter for PyCantus is a web API that facilitates working with the filtration component of the <a href=>pycantus</a> 
+          library — a library for working with data on Gregorian chant.
+          <br><br>
+          This API provides an interface that allows users to prepare their filtration setup using a form, 
+          that also provides a list of potential values for individual fields based on the CantusCorpus v1.0 dataset.  
+          Once the selection is complete, simply click on the "Submit setting to generate filtration file" button 
+          and then download the YAML file describing the filter settings, which can then be loaded by the pycantus library.
+          <br><br>
+          If no value is entered in any of the fields, this is subsequently evaluated as "I don't care" 
+          and records with any value (even with such field being empty for the record) in the given field are considered.
+          <br><br>
+          Below is a description of the individual fields that correspond to the data model in the <a href=>pycantus</a>
+          library and that can be used to filter data, including sample values and links to other sources. <br>
+          If you are new to Gregorian chant and its data, we strongly recommend reading through
+           <a href="https://cantusdatabase.org/documents/">introductory manuals</a> completed for <a href="https://cantusdatabase.org/">Cantus Database</a>.
+        </div>
+
+        <h4>Fields</h4>
+        <div class="container mt-2 mb-5">
+          <div class="list-group list-group-root">
+            <a href="#chants" class="list-group-item list-group-item-action">Chants</a>
+            <div class="list-group">
+              <a href="#genre" class="list-group-item list-group-item-action"><b>Genre</b></a>
+              <a href="#office" class="list-group-item list-group-item-action"><b>Office</b></a>
+              <a href="#feast" class="list-group-item list-group-item-action"><b>Feast</b></a>
+              <a href="#db" class="list-group-item list-group-item-action"><b>Source Database</b></a>
+            </div>
+            <a href="#sources" class="list-group-item list-group-item-action">Sources</a>
+            <div class="list-group">
+              <a href="#title" class="list-group-item list-group-item-action"><b>Title</b></a>
+              <a href="#siglum" class="list-group-item list-group-item-action"><b>Siglum</b></a>
+              <a href="#century" class="list-group-item list-group-item-action"><b>Century</b></a>
+              <a href="#num_century" class="list-group-item list-group-item-action"><b>Numerical Century</b></a>
+              <a href="#provenance" class="list-group-item list-group-item-action"><b>Provenance</b></a>
+              <a href="#cursus" class="list-group-item list-group-item-action"><b>Cursus</b></a>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="">Chants</h3>
+        <div class="container mt-2 mb-3">
+        Following first three fields are reflecting directly what is usualy writen in the medieval source itself. <br>
+        {% load static %}
+        <img src="{% static 'img/rubric.png' %}" alt="Rubric in medieval manuscript description." style="height:400px;"><br>
+        Rubric in medieval liturgical manuscript with description of each part. <br><br>
+
+        And here we present schema on Cantus Index ecosystem that is here used to provide wider image on the "old book" -> "web database" path
+        of the data. 
+        <img src="{% static 'img/chant-cataloguing-schema.png' %}" alt="" style="height: 600px;"><br>
+        Chant data in the Cantus ecosystem. An expert reads a manuscript (today most often digitised), 
+        identifies individual instances of chants, and creates their database records: most importantly, 
+        assigning the Cantus ID to identify which unit of chant repertoire is on the page (pink process). 
+        Expertise in the liturgy of the Latin church is needed, as one must correctly interpret abbreviated 
+        notes in the manuscript --- rubrics --- in order to identify the liturgical position and function of the chant 
+        (dark green process); together with the text of the chant, this then allows one to assign the correct Cantus ID. 
+        A link to the source and page (folio) within the source is added (blue process). 
+        Once a record with a Cantus ID is added to a database in the Cantus ecosystem, the Cantus Index hub 
+        will retrieve the record, primarily via a search for all instances of the given 
+        Cantus ID across all databases that are registered with Cantus Index (purple process; automatic).
+        </div>
+        <div class="container mt-2 mb-3">
+          <h4 id="genre">Genre</h4>
+            <div class="container mt-1 mb-1">
+              Individual songs can be divided into two larger categories according to style, which are further
+              divided into more specific genres. These are liturgical recitative and free
+              composition. This division is based on an effort to find a balance between the comprehensibility
+              of the sung text and the beauty and richness of the musical component. <br><br>
+              The basic feature of liturgical recitative is the singing of the text on a single tone, with the ends of sentences 
+              and other sections emphasized by a slight rise or fall in the melody. 
+              This technique can be used for any text of any length. It is commonly used in prayers and readings, i.e., 
+              texts that change almost every day of the year. <br><br>
+              Psalmody, the method of performing psalm texts, constitutes a specific intermediate stage.
+              Because these are texts recited with freely composed chants in close proximity (antiphons or responsories), 
+              the recitation formulas have been perfected. In addition, there are a
+              limited number of psalms, and they are all used during each week. <br><br>
+              In contrast, it is typical for free composition that each text has its own melody of varying complexity. 
+              As mentioned above, these are mainly antiphons (which form the boundaries of the psalms) and responsories 
+              (which often delimit the readings - lessons), followed by hymns (songs with a strophic structure) 
+              and invitatories (songs opening the night prayers of the office). After the early Middle Ages, sequences 
+              and tropes (more free and varied genres) were added.<br><br>
+              The Mass was expanded to include genres corresponding to its parts (e. g. Alleluia, Credo or Gloria).<br><br>
+              Here is an overview of main genres of Office of Hours: <br>
+              <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Abbreviation</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Antiphons</td>
+                    <td>A</td>
+                    <td>Short, tuneful chants that precede psalms and canticles</td>
+                  </tr>
+                  <tr>
+                    <td>Invitatory antiphon</td>
+                    <td>I</td>
+                    <td>An antiphon sung in alternation between verses of Psalm 94, <em>Venite exsultemus</em> at beginning of Matins.</td>
+                  </tr>
+                  <tr>
+                    <td>Responsory</td>
+                    <td>R</td>
+                    <td>Ornate chant with two primary parts: Respond and Verse. R in database refers to Respond. Often sung in response to a Lesson (longer reading).</td>
+                  </tr>
+                  <tr>
+                    <td>Hymns</td>
+                    <td>H</td>
+                    <td>Poetic texts with multiple stanzas (strophic,tuneful chants)</td>
+                  </tr>
+                  <tr>
+                    <td>Responsory verse</td>
+                    <td>V</td>
+                    <td>Verse that completes a responsory together with Respond</td>
+                  </tr>
+                  <tr>
+                    <td>Versicle</td>
+                    <td>W</td>
+                    <td>Short sung sentences followed by a short sung Response</td>
+                  </tr>
+                  <tr>
+                    <td>Canticle</td>
+                    <td>Ca</td>
+                    <td>Poetic texts from the New Testament, usually the Benedictus and Magnificat, sung to psalm tones.</td>
+                  </tr>
+                  <tr>
+                    <td>Psalm</td>
+                    <td>Ps (PS)</td>
+                    <td>Poetic texts from the Old Testament sung to psalm notes</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              List of genres used in Cantus Index can be found <a href="https://cantusindex.org/genre">here</a>.
+              <br>
+              For more detailed info refer to some of the Cantus Database <a href="https://cantusdatabase.org/documents/">
+              Instructional Documents</a> or to literature such as 
+              <i>Harper, John. The Forms and Orders of Western Liturgy from the Tenth to the Eighteenth Century: A
+              Historical Introduction and Guide for Students and Musicians. Oxford: Clarendon Paperbacks, 1991 </i> 
+              or 
+              <i>Hughes, Andrew. Medieval Manuscripts for Mass and Office. A Guide to their Organization and
+              Terminology. Toronto; Buffalo; London: University of Toronto Press, 1982.</i>
+            <br><br>
+            </div>
+          <h4 id="office">Office</h4>
+            <div class="container mt-1 mb-1">
+              Office brings answer to the question "What time shloud we sing this?" giving each chant time slot in the day
+              of medieval community. <br><br>
+              Daily cycle of the Office with indicated Mass (after Hiley, 2009):
+              <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col"><em>Latin</em></th>
+                  <th scope="col">English</th>
+                  <th scope="col">Abbreviation</th>
+                  <th scope="col">Time of Day</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><em>Ad vesperam</em></td>
+                  <td>Vespers</td>
+                  <td>V</td>
+                  <td>before sunset</td>
+                </tr>
+                <tr>
+                  <td><em>Ad completorium</em></td>
+                  <td>Compline</td>
+                  <td>C</td>
+                  <td>before rest</td>
+                </tr>
+                <tr>
+                  <td><em>Ad Matutinum</em></td>
+                  <td>Matins</td>
+                  <td>M</td>
+                  <td>at night, before Lauds (after midnight)</td>
+                </tr>
+                <tr>
+                  <td><em>Ad Laudes</em></td>
+                  <td>Lauds</td>
+                  <td>L</td>
+                  <td>before down, after Matins</td>
+                </tr>
+                <tr>
+                  <td><em>Ad primam</em></td>
+                  <td>Prime</td>
+                  <td>P</td>
+                  <td>at dawn</td>
+                </tr>
+                <tr>
+                  <td><em>Missa matutinalis</em></td>
+                  <td>Morning Mass</td>
+                  <td>MI or MASS</td>
+                  <td>(in winter after Terce)</td>
+                </tr>
+                <tr>
+                  <td><em>Ad tertiam</em></td>
+                  <td>Terce</td>
+                  <td>T</td>
+                  <td>at nine</td>
+                </tr>
+                <tr>
+                  <td><em>MISSA</em></td>
+                  <td>Mass</td>
+                  <td> MI or MASS</td>
+                  <td>(in winter after Sext)</td>
+                </tr>
+                <tr>
+                  <td><em>Ad sextam</em></td>
+                  <td>Sext</td>
+                  <td>S</td>
+                  <td>at noon</td>
+                </tr>
+                <tr>
+                  <td><em>Ad nones</em></td>
+                  <td>None</td>
+                  <td>N</td>
+                  <td>at three</td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-center fst-italic">
+                    On great feasts<sup>a</sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td><em>Ad vesperam II</em></td>
+                  <td>Second Vespers</td>
+                  <td>V2</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><em>Ad completorium</em></td>
+                  <td>Compline</td>
+                  <td>C</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="fst-italic small">
+              <sup>a</sup> On days of special significance, on the eve of the following day 
+              instead of the usual Vespers, Second Vespers are sung, relating to that feast.
+            </p>
+            <br>
+            Structure of each of the offices/services slightly varies, for example Lauds and Vespers have the following order:<br>
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Chants</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Opening versicles</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Antiphons with 5 psalms</td>
+                  <td>Each antiphon is sung twice - before and after each psalm. </td>
+                </tr>
+                <tr>
+                  <td>Chapter</td>
+                  <td>Short reading</td>
+                </tr>
+                <tr>
+                  <td>Hymn</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Versicle and response</td>
+                  <td>Short sung sentences followed by a short sung Response</td>
+                </tr>
+                <tr>
+                  <td><strong>Lauds:</strong> Antiphon and <em>Benedictus</em></td>
+                  <td>Canticle</td>
+                </tr>
+                <tr>
+                  <td><strong>Vespers:</strong> Antiphon and <em>Magnificat</em></td>
+                  <td>Canticle</td>
+                </tr>
+                <tr>
+                  <td>Collect and <em>Benedicamus domino</em></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <br><br>
+            </div>
+          <h4 id="feast">Feast</h4>
+            <div class="container mt-1 mb-1">
+              The field “feast” indicates for which liturgical event the chant was prescribed/intended. 
+              It is often writen directly in the source as part of rubrics (look above on examples).<br>
+              <b>E.g.:</b> <i>St. George</i> or <i>Dom. 1 Adventus</i>
+              <br>
+              One feast can be encoded by two or more different terms based on source database annotation style.<br>
+              Lists of feasts can be found e.g. on <a href="https://cantusindex.org/feasts">Cantus Index</a> 
+              and <a href="https://lfri.pemdatabase.eu/feasts">LFRI</a> websites.
+              <br><br>
+            </div>
+          <h4 id="db">Source database</h4>
+            <div class="container mt-1 mb-1">
+              Abbreviation of database from Cantus Index network where chant records are comming from. <br><br>
+              <a href="https://cantusindex.org">Cantus Index</a> databases that can be found in data from CantusCorpus v1.0 are:
+              <table class="table  table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Abbreviation</th>
+                    <th scope="col">Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Cantus Database</td>
+                    <td>CD</td>
+                    <td><a href="https://cantusdatabase.org/" target="_blank" rel="noopener">https://cantusdatabase.org/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Medieval Music Manuscripts Online</td>
+                    <td>MMMO</td>
+                    <td><a href="https://musmed.eu/" target="_blank" rel="noopener">https://musmed.eu/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Slovak Early Music Database</td>
+                    <td>CSK</td>
+                    <td><a href="https://cantus.sk/" target="_blank" rel="noopener">https://cantus.sk/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Cantus Fontes Bohemiae</td>
+                    <td>FCB</td>
+                    <td><a href="https://cantusbohemiae.cz/" target="_blank" rel="noopener">https://cantusbohemiae.cz/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Cantus Planus in Polonia</td>
+                    <td>CPL</td>
+                    <td><a href="https://cantusplanus.pl/" target="_blank" rel="noopener">https://cantusplanus.pl/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Portuguese Early Music Database</td>
+                    <td>PEM</td>
+                    <td><a href="https://pemdatabase.eu/" target="_blank" rel="noopener">https://pemdatabase.eu/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Spanish Early Music Manuscripts Database</td>
+                    <td>SEMM</td>
+                    <td><a href="https://musicahispanica.eu/" target="_blank" rel="noopener">https://musicahispanica.eu/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Hungarian Chant Database</td>
+                    <td>HCD</td>
+                    <td><a href="https://hun-chant.eu/" target="_blank" rel="noopener">https://hun-chant.eu/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Medieval Music Manuscripts from Austrian Monasteries</td>
+                    <td>A4M</td>
+                    <td><a href="https://austriamanus.org/" target="_blank" rel="noopener">https://austriamanus.org/</a></td>
+                  </tr>
+                  <tr>
+                    <td>Codicologica et Hymnologica Bohemica Liturgica</td>
+                    <td>HYM</td>
+                    <td><a href="https://hymnologica.cz/" target="_blank" rel="noopener">https://hymnologica.cz/</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <br><br>
+            </div>
+        </div>
+
+        <h3 id="">Sources</h3>
+        <div class="container mt-2 mb-3">
+          <h4 id="title">Title</h4>
+            <div class="container mt-1 mb-1">
+              Textual identificator of the source, can be same as siglum or possibly some traditional name.<br>
+              <b>E.g.:</b> <i>A-KN CCl 00063 Antiphonarium</i> or <i>Jistebnice Gradueale / Jistebnický graduál</i>
+              <br><br>
+            </div>
+            <h4 id="Siglum">Siglum</h4>
+            <div class="container mt-1 mb-1">
+              Identificator of the source (mostly <a href="https://rism.info/">RISM</a> style, but can be different). <br>
+              <b>E.g.:</b> <i>A-Gu Ms 0807</i> or <i>CDN-Mrb MS Medieval 0222</i>
+              <br><br>
+            </div>
+            <h4 id="century">Century</h4>
+            <div class="container mt-1 mb-1">
+              Text representation of the century of origin (taken directly from database containing that source record).
+              <br>
+              <b>E.g.:</b> <i>12th century (2nd quarter)</i> or <i>c. 1200</i>
+              <br><br>
+            </div>
+            <h4 id="num_century">Numerical Century</h4>
+            <div class="container mt-1 mb-1">
+              Cenury of origin represented as single integer number. <br>
+              <b>E.g.:</b> value <i>12</i> for <i>12th century</i> as well as for <i>1155</i> or <i>1st half of 12th</i>
+              <br><br>
+            </div>
+            <h4 id="provenance">Provenance</h4>
+            <div class="container mt-1 mb-1">
+              Provenance means "where is the source (book) from". <br>
+              Different levels of granularity are used. <br>
+              <b>E.g.:</b> <i>St. George monastery in Prague</i> or <i>Spain</i>
+              <br><br>
+            </div>
+            <h4 id="cursus">Cursus</h4>
+            <div class="container mt-1 mb-1">
+              Cursus indicates the origin/place of use of the source in terms of institution. <br>
+              <b>E.g.:</b> <i>secular</i> cursus (meaning it was used in other institutions than monasteries, e.g. cathedrals) 
+              or <i>monastic</i> cursus (for sources comming from monasteries)
+              <br>
+            </div>
+          </div>
+      </div>
+    {% endblock %}

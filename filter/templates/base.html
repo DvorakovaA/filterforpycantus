@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Gets external code shared by (almost) all pages in one one place -->
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}" />
+        <script async src="{% static 'bootstrap/bootstrap.bundle.min.js' %}" ></script>
+        
+        <!-- Icon -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- All visual stuff, no need for separate ones for each page -->
+        <style>
+            .tabcontent {
+            display: none;
+            } 
+
+            .child {
+                float: left;
+                padding: 10px;
+            }
+
+            h3, .h3 {
+                margin-bottom: 0;
+            }
+
+            h4, .h4 {
+                margin-top: 0;
+            }
+
+            li {
+                display: inline;
+            }
+
+            #navbar-app{
+                font-size: larger;
+            }
+
+            .helptext {
+                display: none;
+            }
+
+            div.input-form {
+                max-width: calc(75vw - 60px);
+            }
+
+            .list-group.list-group-root > .list-group > .list-group-item {
+                padding-left: 35px;
+            }
+            .list-group.list-group-root > .list-group > .list-group > .list-group-item {
+                padding-left: 50px;
+            }
+
+            .help_pic {
+                border: 5px solid #dad9d9;
+            }
+
+            .back-button {
+                position: sticky;
+            }
+
+        </style>
+
+        <title>{% block title %} Filtrate for Pycantus {% endblock %}</title>
+    </head>
+
+    <body>
+        {% block header %} 
+         <!-- A grey horizontal navbar that becomes vertical on small screens -->
+            <nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top w-100">
+                <div class="container-fluid">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a id="navbar-app" class="nav-link active ms-3" href = '/filter/'>Filter for PyCantus</a>
+                    </li>
+                  </ul>
+
+                  <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active ms-auto" href="/filter/about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active ms-auto" href="/filter/contact">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link active ms-auto" href="/filter/help">Help</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+        {% endblock %}
+
+
+        <div id="side_buttons" style="float: right;">
+            <div class="container ms-4 mt-3 mr" style="float:right">
+                
+            </div>
+
+            {% block side_buttons %}
+
+            {% endblock %}
+        </div>
+
+
+        <div id="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    
+    </body>
+</html>
