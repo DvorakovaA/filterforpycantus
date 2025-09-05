@@ -24,4 +24,4 @@ Homepage = "https://github.com/DvorakovaA/filterforpycantus"
 Repository = "https://github.com/DvorakovaA/filterforpycantus.git"
 
 [tool.setuptools.packages.find]
-include = ["filterforpycantus"]
+include = ["filter"]
