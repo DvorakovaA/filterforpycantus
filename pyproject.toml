@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "filterforpycantus"
+version = "0.1.0"
+description = "A Django plugin for generating filtering YAML files for PyCantus."
+authors = [
+  { name = "Anna Dvorakova", email = "anna.dvorakova332@student.cuni.cz" }
+]
+
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = [
+  "Django>=5.2",
+  "pandas>=2.3.1",
+  "PyYAML>=6.0.2"
+]
+
+[project.urls]
+Homepage = "https://github.com/DvorakovaA/filterforpycantus"
+Repository = "https://github.com/DvorakovaA/filterforpycantus.git"
+
+[tool.setuptools.packages.find]
+include = ["filterforpycantus"]
