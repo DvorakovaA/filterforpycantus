@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.staticfiles import finders
 from .fields import RepeatableChoiceWithOtherField
 import pandas as pd
 from functools import lru_cache
@@ -13,13 +14,17 @@ def get_field_choices_from_static(file, column):
         file (str): Name of the CSV file (without extension) located in 'filter/static/'.
         column (str): The column name from which to extract unique choices. 
     """
+    path = finders.find(f"filter/{file}.csv")
+    if not path:
+        print(f"Static file filter/{file}.csv not found.")
+        return []
     try:
-        values = pd.read_csv('filter/static/'+file+'.csv')
+        values = pd.read_csv(path)
         choices = list(set(values[column].dropna()))
         choices.sort()
         return list(zip(choices, choices))
     except Exception as e:
-        print(f"Error reading static/{file}.csv: {e}")
+        print(f"Error reading static/filter/{file}.csv: {e}")
         return []
     
 OFFICE_CHOICES = get_field_choices_from_static('office', 'name')
