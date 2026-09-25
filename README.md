@@ -1,40 +1,40 @@
 # Filter for pycantus
-This project contains a Django template providing a web API for easily creating YAML files that help with the configuration of filtration in the [pycantus](https://github.com/dact-chant/PyCantus) library.  
 
-It is deployed at [https://filterforpycantus.owx.cz](https://filterforpycantus.owx.cz).  
-  
-You can also easily plug this Django code into your app.
+This repository now ships a **fully static** version of Filter for PyCantus for GitHub Pages.
 
-### How to use Filter for PyCantus as plugin in my Django web application
+## What it does
 
-It is constructed as Django app, usage is similar to other extensions.
+The site keeps the original workflow:
 
-1. Run `pip install git+https://github.com/DvorakovaA/filterforpycantus.git` in the right environment where you develop your web application.
+1. Fill in the filtration form.
+2. Submit to prepare settings.
+3. Download the generated YAML file for use with [pycantus](https://github.com/dact-chant/PyCantus).
 
-2. Add `filter` to INSTALLED_APPS in your web application
-    ```
-    INSTALLED_APPS = [
-        ...
-        "filter",
-    ]
-    ```
+No Django server is required for normal usage anymore.
 
-3. Run `python manage.py collectstatic`  
-(make sure you have `django.contrib.staticfiles` in `INSTALLED_APPS` as well as `STATIC_ROOT` set in your `settings.py`)
+## Local usage (no server runtime required)
 
+Open `/home/runner/work/filterforpycantus/filterforpycantus/index.html` in a browser, or serve the repository as static files (for example with `python -m http.server`).
 
-4. Add filter urs into yours `urls.py`:  
-    ```
-    urlpatterns = [
-        ...
-        path("filter/", include("filter.urls")),
-    ]
-    ```
+## GitHub Pages deployment
 
-In case of troubles try to confront Django documentation about reusable apps installation.
+A workflow is included at `.github/workflows/pages.yml`.
 
+- Trigger: pushes to `main` (and manual runs).
+- Deployment: uses `actions/configure-pages`, `actions/upload-pages-artifact`, and `actions/deploy-pages`.
+- Artifact source: repository contents (`path: .`).
 
-### About project
+Because links and asset paths are relative, the site works under repository subpaths (project pages), not just domain root.
+
+Expected Pages URL shape:
+
+- `https://<owner>.github.io/filterforpycantus/`
+
+## Repository notes
+
+The original Django code remains in `filter/` as reference/source history, but the deployable app is now static HTML/CSS/JavaScript in the repository root.
+
+## About project
 
 Filter for pycantus (as well as PyCantus itself) is being developed under the Digital Analysis of Chant Transmission ([DACT](https://dact-chant.ca/)). This project, funded by the Social Sciences and Humanities Research Council of Canada, aims to advance the study of chant dissemination using computational tools.
 

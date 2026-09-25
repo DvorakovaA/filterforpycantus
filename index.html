@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="filter/static/filter/bootstrap/bootstrap.min.css" />
+  <script async src="filter/static/filter/bootstrap/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    li { display: inline; }
+    #navbar-app { font-size: larger; }
+    div.input-form { max-width: calc(75vw - 60px); }
+  </style>
+  <title>Filter for PyCantus</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top w-100">
+    <div class="container-fluid">
+      <ul class="navbar-nav"><li class="nav-item"><a id="navbar-app" class="nav-link active ms-3" href="index.html">Filter for PyCantus</a></li></ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active ms-auto" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active ms-auto" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link active ms-auto" href="help.html">Help</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="input-form mb-5">
+    <div class="container ms-4 mt-4 mr-1 border border-secondary rounded">
+      <form id="filtrationForm">
+        <div class="row align-items-start">
+          <div class="row justify-content-around">
+            <div class="col md-4 t-1"><h2>Filtration form</h2><br></div>
+            <div class="col offset-md-4"><br><p class="text-end" style="float: right;"><i>The values in the menu are based on the CantusCorpus v1.0 dataset. The option <b>Other</b> is always available for entering your own value(s).</i></p></div>
+          </div>
+          <div class="row justify-content-around">
+            <div class="col md-4 mb-3">
+              <b><label for="id_name" class="form-label">Name of filtration setting:</label></b>
+              <input id="id_name" name="name" maxlength="100" required class="form-control" placeholder="filter_for_my_great_experiment_XY" />
+            </div>
+          </div>
+          <div id="formLoadError" class="alert alert-danger mt-2" style="display:none;"></div>
+          <div id="include-section"></div>
+          <div id="exclude-section"></div>
+        </div>
+        <div class="d-flex justify-content-end mt-3 mb-2">
+          <button type="submit" class="btn btn-outline-primary">Submit setting to generate filtration file</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="filter/static/filter/app.js"></script>
+</body>
+</html>
