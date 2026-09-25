@@ -1,7 +1,7 @@
 # Filter for pycantus
 This project contains a Django template providing a web API for easily creating YAML files that help with the configuration of filtration in the [pycantus](https://github.com/dact-chant/PyCantus) library.  
 
-It is deployed at [https://filterforpycantus.owx.cz](https://filterforpycantus.owx.cz).  
+It is deployed on GitHub pages: XXX. 
   
 You can also easily plug this Django code into your app.
 
